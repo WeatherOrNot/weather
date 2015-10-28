@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html>
 
 <head>
 	<title>Weather Or Not</title>
+
+
 	<style type="text/css">
 .flex-container {
   padding: 0;
@@ -17,6 +19,8 @@
   
   -webkit-flex-flow: row wrap;
   justify-content: space-around;
+
+  
 }
 
 .flex-item {
@@ -26,11 +30,13 @@
   height: 350px;
   margin-top: 10px;
   
-  line-height: 150px;
+  line-height: 20px;
   color: white;
-  font-weight: bold;
-  font-size: 48px;
+  font-family: Century Gothic, sans-serif;
+  /*font-weight: bold;*/
+  font-size: 24px;
   text-align: center;
+  position: relative;
 }
 
 .searchClass {
@@ -38,20 +44,61 @@
   background: LightBlue;
   padding: 5px;
   width: 400px;
-  height: 150px;
+  height: 175px;
   margin-top: 10px;
   
-  line-height: 50px;
+  line-height: 30px;
   color: white;
   font-weight: bold;
   font-size: 24px;
   text-align: center;
 }
 
+p {
+  display: block;
+}
+
 #search {
    font-size: 16px;
 
 }
+
+img {
+  max-width: 100px;
+  max-height: 100px;
+ /* -webkit-align-self: flex-end;
+  align-self: flex-end;*/
+  /*flex: 0 1 auto;*/
+
+}
+
+.pictures {
+ 	display: block;
+ 	/*align-items: flex-end; 
+	display: flex; */
+ 	
+ }
+ 
+#overview {
+	text-align: left;
+	font-family: Century Gothic, sans-serif;
+	margin-top: 10px;
+	margin-left: 10px;
+	font-weight: normal;
+
+}
+
+#currentCity {
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+
+#currentTemp {
+	font-size: 40px;
+	margin-bottom: 10px;
+}
+
+
 
 
 
@@ -61,19 +108,48 @@
 </head>
 <body>
 <div class="searchClass">
-
 	<form>
 	<input id="search" type="search" placeholder="City or Zip" name="location" required>
+	<button id="go" type="button">Weather!</button>
 	</form>
-
-
+<div id="overview">
+<div id="currentCity"></div>
+<div id="currentTemp"></div>
+<div id="currentConditions"></div>
+</div>
 
 </div>
 
-<ul class="flex-container">
-  <li class="flex-item">Temperature</li>
-  <li class="flex-item">Rain</li>
-  <li class="flex-item">Wind</li>
+<ul class="flex-container" id="temp">
+  <li class="flex-item">
+ 	 	<h3>Temperature</h3>
+ 	 	<p>Current: <span id="current"></span></p>
+ 	 	<p>High: <span id="high"></span></p>
+	 	<p>Low: <span id="low"></span></p>
+  	<div class="pictures">
+  		<img id="tempImg" src="http://images.clipartpanda.com/thermometer-clip-art-medical_red_thermometer_1.png">
+  	</div>
+  	</li>
+
+  <li class="flex-item" id="rain">
+  	<h3>Rain</h3>
+  	<p>Forecast: <span id="rainInfo"></span></p>
+  	<p>Bring <span id="rainClothing"></span></p>
+  	<div class="pictures">
+  		<img id="rainImg" src="http://images.clipartpanda.com/thermometer-clip-art-medical_red_thermometer_1.png">
+  	</div>	
+
+  </li>
+
+  <li class="flex-item" id="wind">
+  	<h3>Wind</h3>
+  	<p>Wind Speed: <span id="windSpeed"></span></p>
+  	<p>Bring a <span id="windClothing"></span></p>
+  	<div class="pictures">
+  		<img id="windImg" src="http://images.clipartpanda.com/thermometer-clip-art-medical_red_thermometer_1.png">
+  	</div>
+  </li>
+
 </ul>
 
 
@@ -83,7 +159,34 @@
 <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
 <script src="http://underscorejs.org/"></script>
 <script>
-  
+
+var locationEntered = $('button#go').on('click', function(){
+var locale = encodeURI(($('input#search').val()));
+return locale;
+});
+
+//Modifies temp box
+$('#temp p #current').append("45 degrees F");
+$('#temp p #high').append("75 degrees F");
+$('#temp p #low').append("-25 degrees");
+
+
+//Modifies rain box
+$('#rain p #rainInfo').append("3 in.");
+$('#rain p #rainClothing').append(" an umbrella.");
+
+//Modifies wind box
+$('#wind p #windSpeed').append("40mph");
+$('#wind p #windClothing').append(" sweater.");
+
+//Top box current location and conditions
+$("#currentCity").append("Albuquerque");
+$("#currentTemp").append("55 &deg;");
+$("#currentConditions").append("Breezy and Sneezy");
+
+
+
+
 </script>
 
 	
